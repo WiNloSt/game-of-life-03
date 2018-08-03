@@ -58,6 +58,14 @@ jobs:
           command: |
             pipenv run pytest
 
+  deploy:
+    <<: *defaults
+    steps:
+      - run:
+          name: Deploy
+          command: |
+            curl -H "Content-Type: application/json" -X POST -d '{"group": "gof-03"}' http://35.240.207.27:5000/webhook
+
 workflows:
   version: 2
   game_of_life:
@@ -72,3 +80,7 @@ workflows:
       - unit_tests:
           requires:
             - python_dependencies
+      - deploy:
+          requires:
+            - static_analysis
+            - unit_tests
