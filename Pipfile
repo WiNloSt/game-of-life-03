@@ -13,3 +13,7 @@ name = "pypi"
 
 "flake8" = "*"
 pytest = "*"
+
+[scripts]
+start = "python gof.py"
+test = pytest
