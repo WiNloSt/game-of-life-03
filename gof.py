@@ -21,11 +21,30 @@ INITIAL_BOARD = {
 }
 
 
-def get_neighbors_of(cell):
+def get_neighbors_of(cell, board):
     """
     Return the neighbors of cell.
     """
-    return 1
+    count = 0
+    (x, y) = cell
+    for cell in board:
+        if cell == (x - 1, y - 1):
+            count += 1
+        elif cell == (x, y - 1):
+            count += 1
+        elif cell == (x + 1, y - 1):
+            count += 1
+        elif cell == (x - 1, y):
+            count += 1
+        elif cell == (x + 1, y):
+            count += 1
+        elif cell == (x - 1, y + 1):
+            count += 1
+        elif cell == (x, y + 1):
+            count += 1
+        elif cell == (x + 1, y + 1):
+            count += 1
+    return count
 
 
 def advance(board):
@@ -34,10 +53,21 @@ def advance(board):
     """
     new_board = set()
     for cell in board:
-        # your code below
+        if ru1(cell):
+            continue
+
+        else:
+            new_board.add(cell)  # your code below
         pass
 
     return new_board
+
+
+def ru1(cell, board):
+    if get_neighbors_of(cell) < 2:
+        return True
+    else:
+        return False
 
 
 def start(board, steps=100, size=20):
